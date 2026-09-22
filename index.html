@@ -28,7 +28,7 @@
       --shadow-lg: 0 12px 40px rgba(11, 61, 74, 0.12);
       --radius: 12px;
       --radius-sm: 8px;
-      --transition: 0.25s ease;
+      --transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     }
 
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -39,7 +39,7 @@
     }
 
     body {
-      font-family: 'DM Sans', system-ui, -apple-system, sans-serif;
+      font-family: 'DM Sans', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
       font-size: 16px;
       line-height: 1.6;
       color: var(--text);
@@ -59,6 +59,60 @@
       padding: 0 20px;
     }
 
+    /* ─── ANIMAÇÕES DE ENTRADA ─── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity 0.7s cubic-bezier(0.4, 0, 0.2, 1), transform 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .reveal-delay-1 { transition-delay: 0.1s; }
+    .reveal-delay-2 { transition-delay: 0.2s; }
+    .reveal-delay-3 { transition-delay: 0.3s; }
+    .reveal-delay-4 { transition-delay: 0.4s; }
+    .reveal-delay-5 { transition-delay: 0.5s; }
+    .reveal-delay-6 { transition-delay: 0.6s; }
+
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(24px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    @keyframes scaleIn {
+      from { opacity: 0; transform: scale(0.92); }
+      to { opacity: 1; transform: scale(1); }
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-8px); }
+    }
+
+    @keyframes shimmer {
+      0% { background-position: -200% center; }
+      100% { background-position: 200% center; }
+    }
+
+    @keyframes pulse-ring {
+      0% { transform: scale(1); opacity: 0.55; }
+      100% { transform: scale(1.55); opacity: 0; }
+    }
+
+    @keyframes gentle-glow {
+      0%, 100% { box-shadow: 0 4px 20px rgba(37, 211, 102, 0.4); }
+      50% { box-shadow: 0 4px 28px rgba(37, 211, 102, 0.65); }
+    }
+
     /* ─── HEADER ─── */
     .header {
       position: fixed;
@@ -69,12 +123,14 @@
       background: rgba(247, 245, 240, 0.92);
       backdrop-filter: blur(12px);
       -webkit-backdrop-filter: blur(12px);
-      border-bottom: 1px solid var(--border);
-      transition: box-shadow var(--transition);
+      border-bottom: 1px solid transparent;
+      transition: box-shadow 0.35s ease, border-color 0.35s ease, background 0.35s ease;
     }
 
     .header.scrolled {
-      box-shadow: var(--shadow);
+      box-shadow: 0 4px 24px rgba(11, 61, 74, 0.1);
+      border-bottom-color: var(--border);
+      background: rgba(247, 245, 240, 0.97);
     }
 
     .header-inner {
@@ -94,7 +150,10 @@
       color: var(--navy);
       letter-spacing: -0.02em;
       flex-shrink: 0;
+      transition: opacity var(--transition);
     }
+
+    .logo:hover { opacity: 0.85; }
 
     .logo-mark {
       width: 36px;
@@ -105,15 +164,19 @@
       align-items: center;
       justify-content: center;
       color: var(--gold);
-      font-family: 'Instrument Serif', serif;
+      font-family: 'Instrument Serif', Georgia, serif;
       font-size: 1.25rem;
       font-weight: 400;
       flex-shrink: 0;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
     }
 
-    .logo-text {
-      display: none;
+    .logo:hover .logo-mark {
+      transform: scale(1.06);
+      box-shadow: 0 4px 12px rgba(11, 61, 74, 0.25);
     }
+
+    .logo-text { display: none; }
 
     .nav {
       display: none;
@@ -125,10 +188,25 @@
       font-size: 0.875rem;
       font-weight: 500;
       color: var(--text-muted);
+      position: relative;
       transition: color var(--transition);
+      padding: 4px 0;
+    }
+
+    .nav a::after {
+      content: '';
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      width: 0;
+      height: 2px;
+      background: var(--teal);
+      border-radius: 1px;
+      transition: width 0.3s ease;
     }
 
     .nav a:hover { color: var(--navy); }
+    .nav a:hover::after { width: 100%; }
 
     .header-cta {
       display: inline-flex;
@@ -140,14 +218,17 @@
       font-weight: 600;
       padding: 10px 16px;
       border-radius: 50px;
-      transition: background var(--transition), transform var(--transition);
+      transition: background 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
       white-space: nowrap;
     }
 
     .header-cta:hover {
       background: var(--navy-dark);
-      transform: translateY(-1px);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 16px rgba(11, 61, 74, 0.25);
     }
+
+    .header-cta:active { transform: translateY(0); }
 
     .header-cta svg {
       width: 16px;
@@ -163,8 +244,10 @@
       height: 40px;
       color: var(--navy);
       border-radius: var(--radius-sm);
+      transition: background 0.25s ease;
     }
 
+    .menu-btn:hover { background: var(--cream-dark); }
     .menu-btn svg { width: 22px; height: 22px; }
 
     .mobile-nav {
@@ -175,24 +258,29 @@
       right: 0;
       background: var(--cream);
       border-bottom: 1px solid var(--border);
-      padding: 16px 20px 24px;
+      padding: 12px 20px 20px;
       flex-direction: column;
-      gap: 4px;
-      box-shadow: var(--shadow);
+      gap: 2px;
+      box-shadow: var(--shadow-lg);
+      animation: fadeInUp 0.3s ease;
     }
 
     .mobile-nav.open { display: flex; }
 
     .mobile-nav a {
-      padding: 12px 8px;
+      padding: 12px 10px;
       font-size: 1rem;
       font-weight: 500;
       color: var(--text);
       border-radius: var(--radius-sm);
-      transition: background var(--transition);
+      transition: background 0.25s ease, color 0.25s ease, padding-left 0.25s ease;
     }
 
-    .mobile-nav a:hover { background: var(--cream-dark); }
+    .mobile-nav a:hover {
+      background: var(--cream-dark);
+      color: var(--navy);
+      padding-left: 16px;
+    }
 
     /* ─── HERO ─── */
     .hero {
@@ -209,8 +297,9 @@
       right: -15%;
       width: 500px;
       height: 500px;
-      background: radial-gradient(circle, rgba(26, 122, 140, 0.06) 0%, transparent 70%);
+      background: radial-gradient(circle, rgba(26, 122, 140, 0.07) 0%, transparent 70%);
       pointer-events: none;
+      animation: float 8s ease-in-out infinite;
     }
 
     .hero-grid {
@@ -230,6 +319,7 @@
       padding: 6px 14px;
       border-radius: 50px;
       margin-bottom: 20px;
+      animation: fadeInUp 0.6s ease both;
     }
 
     .hero-badge svg {
@@ -239,13 +329,14 @@
     }
 
     .hero h1 {
-      font-family: 'Instrument Serif', serif;
+      font-family: 'Instrument Serif', Georgia, serif;
       font-size: clamp(1.875rem, 5vw, 2.75rem);
       font-weight: 400;
       line-height: 1.2;
       color: var(--navy);
       letter-spacing: -0.02em;
       margin-bottom: 16px;
+      animation: fadeInUp 0.7s ease 0.1s both;
     }
 
     .hero h1 em {
@@ -259,6 +350,7 @@
       max-width: 480px;
       margin-bottom: 28px;
       line-height: 1.65;
+      animation: fadeInUp 0.7s ease 0.2s both;
     }
 
     .hero-ctas {
@@ -266,6 +358,7 @@
       flex-wrap: wrap;
       gap: 12px;
       margin-bottom: 32px;
+      animation: fadeInUp 0.7s ease 0.3s both;
     }
 
     .btn-primary {
@@ -278,17 +371,35 @@
       font-weight: 600;
       padding: 14px 24px;
       border-radius: 50px;
-      transition: background var(--transition), transform var(--transition), box-shadow var(--transition);
+      transition: background 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
       box-shadow: 0 4px 16px rgba(11, 61, 74, 0.2);
+      position: relative;
+      overflow: hidden;
     }
+
+    .btn-primary::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.12), transparent);
+      transition: left 0.5s ease;
+    }
+
+    .btn-primary:hover::before { left: 100%; }
 
     .btn-primary:hover {
       background: var(--navy-dark);
-      transform: translateY(-2px);
-      box-shadow: 0 6px 20px rgba(11, 61, 74, 0.25);
+      transform: translateY(-3px);
+      box-shadow: 0 8px 24px rgba(11, 61, 74, 0.3);
     }
 
-    .btn-primary svg { width: 18px; height: 18px; }
+    .btn-primary:active { transform: translateY(-1px); }
+
+    .btn-primary svg { width: 18px; height: 18px; position: relative; z-index: 1; }
+    .btn-primary span, .btn-primary { position: relative; z-index: 1; }
 
     .btn-secondary {
       display: inline-flex;
@@ -301,12 +412,13 @@
       padding: 14px 24px;
       border-radius: 50px;
       border: 1.5px solid var(--border);
-      transition: border-color var(--transition), background var(--transition);
+      transition: border-color 0.3s ease, background 0.3s ease, transform 0.3s ease;
     }
 
     .btn-secondary:hover {
       border-color: var(--navy);
-      background: rgba(11, 61, 74, 0.04);
+      background: rgba(11, 61, 74, 0.05);
+      transform: translateY(-2px);
     }
 
     .hero-rating {
@@ -315,6 +427,7 @@
       gap: 10px;
       font-size: 0.875rem;
       color: var(--text-muted);
+      animation: fadeInUp 0.7s ease 0.4s both;
     }
 
     .stars {
@@ -328,6 +441,7 @@
     .hero-visual {
       display: none;
       position: relative;
+      animation: scaleIn 0.8s ease 0.3s both;
     }
 
     .hero-card {
@@ -336,6 +450,14 @@
       padding: 28px;
       box-shadow: var(--shadow-lg);
       border: 1px solid var(--border);
+      transition: transform 0.4s ease, box-shadow 0.4s ease;
+      animation: float 6s ease-in-out 1s infinite;
+    }
+
+    .hero-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 20px 50px rgba(11, 61, 74, 0.15);
+      animation: none;
     }
 
     .hero-card-header {
@@ -356,7 +478,10 @@
       align-items: center;
       justify-content: center;
       color: var(--gold);
+      transition: transform 0.3s ease;
     }
+
+    .hero-card:hover .hero-card-icon { transform: scale(1.08) rotate(-3deg); }
 
     .hero-card-icon svg { width: 22px; height: 22px; }
 
@@ -382,10 +507,16 @@
       padding: 14px 8px;
       background: var(--cream);
       border-radius: var(--radius-sm);
+      transition: background 0.3s ease, transform 0.3s ease;
+    }
+
+    .hero-stat:hover {
+      background: var(--cream-dark);
+      transform: scale(1.04);
     }
 
     .hero-stat-value {
-      font-family: 'Instrument Serif', serif;
+      font-family: 'Instrument Serif', Georgia, serif;
       font-size: 1.5rem;
       color: var(--navy);
       line-height: 1.2;
@@ -414,7 +545,10 @@
       display: flex;
       align-items: flex-start;
       gap: 12px;
+      transition: transform 0.3s ease;
     }
+
+    .trust-item:hover { transform: translateY(-3px); }
 
     .trust-icon {
       width: 36px;
@@ -426,6 +560,12 @@
       justify-content: center;
       color: var(--gold);
       flex-shrink: 0;
+      transition: background 0.3s ease, transform 0.3s ease;
+    }
+
+    .trust-item:hover .trust-icon {
+      background: rgba(196, 163, 90, 0.28);
+      transform: scale(1.1);
     }
 
     .trust-icon svg { width: 18px; height: 18px; }
@@ -441,10 +581,8 @@
       font-weight: 600;
     }
 
-    /* ─── SECTIONS COMMON ─── */
-    .section {
-      padding: 64px 0;
-    }
+    /* ─── SECTIONS ─── */
+    .section { padding: 64px 0; }
 
     .section-header {
       text-align: center;
@@ -463,7 +601,7 @@
     }
 
     .section-title {
-      font-family: 'Instrument Serif', serif;
+      font-family: 'Instrument Serif', Georgia, serif;
       font-size: clamp(1.625rem, 4vw, 2.25rem);
       font-weight: 400;
       color: var(--navy);
@@ -479,9 +617,7 @@
     }
 
     /* ─── SERVICES ─── */
-    .services {
-      background: var(--white);
-    }
+    .services { background: var(--white); }
 
     .services-grid {
       display: grid;
@@ -493,13 +629,15 @@
       border: 1px solid var(--border);
       border-radius: var(--radius);
       padding: 24px;
-      transition: border-color var(--transition), box-shadow var(--transition), transform var(--transition);
+      transition: border-color 0.35s ease, box-shadow 0.35s ease, transform 0.35s ease, background 0.35s ease;
+      cursor: default;
     }
 
     .service-card:hover {
-      border-color: rgba(26, 122, 140, 0.3);
-      box-shadow: var(--shadow);
-      transform: translateY(-2px);
+      border-color: rgba(26, 122, 140, 0.35);
+      box-shadow: 0 12px 32px rgba(11, 61, 74, 0.1);
+      transform: translateY(-6px);
+      background: var(--white);
     }
 
     .service-icon {
@@ -512,6 +650,12 @@
       justify-content: center;
       color: var(--gold);
       margin-bottom: 16px;
+      transition: transform 0.35s ease, background 0.35s ease;
+    }
+
+    .service-card:hover .service-icon {
+      transform: scale(1.1) rotate(-4deg);
+      background: var(--teal);
     }
 
     .service-icon svg { width: 22px; height: 22px; }
@@ -521,7 +665,10 @@
       font-weight: 600;
       color: var(--navy);
       margin-bottom: 8px;
+      transition: color 0.3s ease;
     }
+
+    .service-card:hover h3 { color: var(--teal); }
 
     .service-card p {
       font-size: 0.9375rem;
@@ -530,22 +677,21 @@
     }
 
     /* ─── HOW IT WORKS ─── */
-    .how {
-      background: var(--cream);
-    }
+    .how { background: var(--cream); }
 
     .steps {
       display: grid;
       gap: 24px;
-      counter-reset: step;
     }
 
     .step {
       display: flex;
       gap: 16px;
       align-items: flex-start;
-      counter-increment: step;
+      transition: transform 0.3s ease;
     }
+
+    .step:hover { transform: translateX(4px); }
 
     .step-num {
       width: 44px;
@@ -556,9 +702,15 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      font-family: 'Instrument Serif', serif;
+      font-family: 'Instrument Serif', Georgia, serif;
       font-size: 1.25rem;
       flex-shrink: 0;
+      transition: transform 0.35s ease, box-shadow 0.35s ease;
+    }
+
+    .step:hover .step-num {
+      transform: scale(1.12);
+      box-shadow: 0 6px 16px rgba(11, 61, 74, 0.25);
     }
 
     .step-content h3 {
@@ -575,9 +727,7 @@
     }
 
     /* ─── ABOUT ─── */
-    .about {
-      background: var(--white);
-    }
+    .about { background: var(--white); }
 
     .about-grid {
       display: grid;
@@ -585,7 +735,7 @@
     }
 
     .about-text h2 {
-      font-family: 'Instrument Serif', serif;
+      font-family: 'Instrument Serif', Georgia, serif;
       font-size: clamp(1.5rem, 3.5vw, 2rem);
       font-weight: 400;
       color: var(--navy);
@@ -614,6 +764,12 @@
       font-size: 0.9375rem;
       color: var(--text);
       font-weight: 500;
+      transition: transform 0.25s ease, color 0.25s ease;
+    }
+
+    .about-list li:hover {
+      transform: translateX(6px);
+      color: var(--navy);
     }
 
     .about-list svg {
@@ -621,7 +777,10 @@
       height: 18px;
       color: var(--teal);
       flex-shrink: 0;
+      transition: transform 0.25s ease;
     }
+
+    .about-list li:hover svg { transform: scale(1.2); }
 
     .about-card {
       background: var(--navy);
@@ -630,6 +789,12 @@
       padding: 32px 28px;
       position: relative;
       overflow: hidden;
+      transition: transform 0.4s ease, box-shadow 0.4s ease;
+    }
+
+    .about-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 16px 40px rgba(11, 61, 74, 0.3);
     }
 
     .about-card::before {
@@ -639,11 +804,14 @@
       right: -20%;
       width: 200px;
       height: 200px;
-      background: radial-gradient(circle, rgba(196, 163, 90, 0.12) 0%, transparent 70%);
+      background: radial-gradient(circle, rgba(196, 163, 90, 0.15) 0%, transparent 70%);
+      transition: transform 0.6s ease;
     }
 
+    .about-card:hover::before { transform: scale(1.3); }
+
     .about-card-quote {
-      font-family: 'Instrument Serif', serif;
+      font-family: 'Instrument Serif', Georgia, serif;
       font-size: 1.25rem;
       font-style: italic;
       line-height: 1.5;
@@ -669,9 +837,7 @@
     .about-card-stars svg { width: 14px; height: 14px; fill: currentColor; }
 
     /* ─── TESTIMONIALS ─── */
-    .testimonials {
-      background: var(--cream);
-    }
+    .testimonials { background: var(--cream); }
 
     .rating-banner {
       display: flex;
@@ -683,7 +849,7 @@
     }
 
     .rating-score {
-      font-family: 'Instrument Serif', serif;
+      font-family: 'Instrument Serif', Georgia, serif;
       font-size: 3rem;
       color: var(--navy);
       line-height: 1;
@@ -712,6 +878,13 @@
       border: 1px solid var(--border);
       border-radius: var(--radius);
       padding: 24px;
+      transition: transform 0.35s ease, box-shadow 0.35s ease, border-color 0.35s ease;
+    }
+
+    .testimonial-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 12px 32px rgba(11, 61, 74, 0.1);
+      border-color: rgba(196, 163, 90, 0.4);
     }
 
     .testimonial-stars {
@@ -755,14 +928,15 @@
       transform: translateX(-50%);
       width: 600px;
       height: 400px;
-      background: radial-gradient(circle, rgba(196, 163, 90, 0.1) 0%, transparent 60%);
+      background: radial-gradient(circle, rgba(196, 163, 90, 0.12) 0%, transparent 60%);
       pointer-events: none;
+      animation: float 10s ease-in-out infinite;
     }
 
     .cta-final .section-label { color: var(--gold); }
 
     .cta-final h2 {
-      font-family: 'Instrument Serif', serif;
+      font-family: 'Instrument Serif', Georgia, serif;
       font-size: clamp(1.625rem, 4vw, 2.25rem);
       font-weight: 400;
       letter-spacing: -0.02em;
@@ -783,12 +957,13 @@
     .cta-final .btn-primary {
       background: var(--gold);
       color: var(--navy);
-      box-shadow: 0 4px 16px rgba(196, 163, 90, 0.3);
+      box-shadow: 0 4px 16px rgba(196, 163, 90, 0.35);
     }
 
     .cta-final .btn-primary:hover {
       background: var(--gold-light);
-      box-shadow: 0 6px 20px rgba(196, 163, 90, 0.4);
+      box-shadow: 0 8px 28px rgba(196, 163, 90, 0.5);
+      transform: translateY(-3px);
     }
 
     /* ─── CONTACT ─── */
@@ -803,7 +978,7 @@
     }
 
     .contact-info h2 {
-      font-family: 'Instrument Serif', serif;
+      font-family: 'Instrument Serif', Georgia, serif;
       font-size: clamp(1.5rem, 3.5vw, 2rem);
       font-weight: 400;
       color: var(--navy);
@@ -817,16 +992,16 @@
       margin-bottom: 28px;
     }
 
-    .contact-items {
-      display: grid;
-      gap: 18px;
-    }
+    .contact-items { display: grid; gap: 18px; }
 
     .contact-item {
       display: flex;
       gap: 14px;
       align-items: flex-start;
+      transition: transform 0.25s ease;
     }
+
+    .contact-item:hover { transform: translateX(4px); }
 
     .contact-item-icon {
       width: 40px;
@@ -838,6 +1013,13 @@
       justify-content: center;
       color: var(--teal);
       flex-shrink: 0;
+      transition: background 0.3s ease, transform 0.3s ease, color 0.3s ease;
+    }
+
+    .contact-item:hover .contact-item-icon {
+      background: var(--navy);
+      color: var(--gold);
+      transform: scale(1.08);
     }
 
     .contact-item-icon svg { width: 18px; height: 18px; }
@@ -857,6 +1039,10 @@
       color: var(--navy);
     }
 
+    .contact-item-value a {
+      transition: color 0.25s ease;
+    }
+
     .contact-item-value a:hover { color: var(--teal); }
 
     .contact-map {
@@ -865,34 +1051,18 @@
       border: 1px solid var(--border);
       background: var(--cream);
       min-height: 240px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      transition: box-shadow 0.35s ease, transform 0.35s ease;
+    }
+
+    .contact-map:hover {
+      box-shadow: var(--shadow-lg);
+      transform: translateY(-2px);
     }
 
     .contact-map iframe {
       width: 100%;
       height: 280px;
       border: 0;
-    }
-
-    .map-fallback {
-      text-align: center;
-      padding: 40px 20px;
-      color: var(--text-muted);
-    }
-
-    .map-fallback svg {
-      width: 40px;
-      height: 40px;
-      color: var(--teal);
-      margin: 0 auto 12px;
-    }
-
-    .map-fallback a {
-      color: var(--teal);
-      font-weight: 600;
-      text-decoration: underline;
     }
 
     /* ─── FOOTER ─── */
@@ -938,10 +1108,13 @@
       display: block;
       font-size: 0.875rem;
       margin-bottom: 6px;
-      transition: color var(--transition);
+      transition: color 0.25s ease, transform 0.25s ease;
     }
 
-    .footer-col a:hover { color: var(--gold); }
+    .footer-col a:hover {
+      color: var(--gold);
+      transform: translateX(3px);
+    }
 
     .footer-bottom {
       border-top: 1px solid rgba(255, 255, 255, 0.1);
@@ -969,13 +1142,17 @@
       align-items: center;
       justify-content: center;
       box-shadow: 0 4px 20px rgba(37, 211, 102, 0.4);
-      transition: transform var(--transition), box-shadow var(--transition);
+      transition: transform 0.3s ease;
+      animation: gentle-glow 2.5s ease-in-out infinite;
     }
 
     .float-wa:hover {
-      transform: scale(1.08);
-      box-shadow: 0 6px 28px rgba(37, 211, 102, 0.5);
+      transform: scale(1.12);
+      animation: none;
+      box-shadow: 0 8px 32px rgba(37, 211, 102, 0.55);
     }
+
+    .float-wa:active { transform: scale(1.05); }
 
     .float-wa svg { width: 28px; height: 28px; }
 
@@ -984,13 +1161,8 @@
       inset: 0;
       border-radius: 50%;
       background: #25D366;
-      animation: pulse 2s infinite;
+      animation: pulse-ring 2s ease-out infinite;
       z-index: -1;
-    }
-
-    @keyframes pulse {
-      0% { transform: scale(1); opacity: 0.6; }
-      100% { transform: scale(1.5); opacity: 0; }
     }
 
     /* ─── RESPONSIVE ─── */
@@ -1030,6 +1202,8 @@
         align-items: center;
       }
 
+      .step:hover { transform: translateY(-4px); }
+
       .footer-grid {
         grid-template-columns: 2fr 1fr 1fr;
       }
@@ -1043,9 +1217,7 @@
 
     @media (min-width: 768px) {
       .header-inner { height: 72px; }
-
       .menu-btn { display: none; }
-
       .nav { display: flex; }
 
       .hero { padding: 120px 0 72px; }
@@ -1080,13 +1252,21 @@
 
     @media (min-width: 1024px) {
       .container { padding: 0 32px; }
-
       .hero h1 { font-size: 2.75rem; }
 
       .services-grid {
         grid-template-columns: repeat(3, 1fr);
         gap: 20px;
       }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+      }
+      .reveal { opacity: 1; transform: none; }
     }
   </style>
 </head>
@@ -1190,7 +1370,7 @@
   <section class="trust-bar">
     <div class="container">
       <div class="trust-grid">
-        <div class="trust-item">
+        <div class="trust-item reveal">
           <div class="trust-icon">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
           </div>
@@ -1199,7 +1379,7 @@
             <div class="trust-value">Mais de 16 anos</div>
           </div>
         </div>
-        <div class="trust-item">
+        <div class="trust-item reveal reveal-delay-1">
           <div class="trust-icon">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg>
           </div>
@@ -1208,7 +1388,7 @@
             <div class="trust-value">Próximo e personalizado</div>
           </div>
         </div>
-        <div class="trust-item">
+        <div class="trust-item reveal reveal-delay-2">
           <div class="trust-icon">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><path d="M22 4L12 14.01l-3-3"/></svg>
           </div>
@@ -1217,7 +1397,7 @@
             <div class="trust-value">PMEs e gestão</div>
           </div>
         </div>
-        <div class="trust-item">
+        <div class="trust-item reveal reveal-delay-3">
           <div class="trust-icon">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
           </div>
@@ -1233,48 +1413,48 @@
   <!-- SERVICES -->
   <section class="section services" id="servicos">
     <div class="container">
-      <div class="section-header">
+      <div class="section-header reveal">
         <span class="section-label">O que fazemos</span>
         <h2 class="section-title">Serviços para sua empresa crescer com organização</h2>
         <p class="section-desc">Soluções contábeis e financeiras pensadas para pequenas e médias empresas que precisam de clareza e suporte real.</p>
       </div>
       <div class="services-grid">
-        <div class="service-card">
+        <div class="service-card reveal">
           <div class="service-icon">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><path d="M14 2v6h6M16 13H8M16 17H8M10 9H8"/></svg>
           </div>
           <h3>Contabilidade empresarial</h3>
           <p>Escrituração, demonstrativos e obrigações contábeis com acompanhamento próximo para sua empresa.</p>
         </div>
-        <div class="service-card">
+        <div class="service-card reveal reveal-delay-1">
           <div class="service-icon">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
           </div>
           <h3>Imposto de Renda</h3>
           <p>Declaração de IR para pessoa física e jurídica, com orientação clara e atenção aos prazos.</p>
         </div>
-        <div class="service-card">
+        <div class="service-card reveal reveal-delay-2">
           <div class="service-icon">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg>
           </div>
           <h3>Consultoria financeira</h3>
           <p>Orientação para decisões financeiras com base em dados reais da sua operação.</p>
         </div>
-        <div class="service-card">
+        <div class="service-card reveal reveal-delay-3">
           <div class="service-icon">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg>
           </div>
           <h3>Apoio para PMEs</h3>
           <p>Atendimento especializado para pequenas e médias empresas que precisam de parceiro confiável.</p>
         </div>
-        <div class="service-card">
+        <div class="service-card reveal reveal-delay-4">
           <div class="service-icon">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2"/><rect x="9" y="3" width="6" height="4" rx="1"/><path d="M9 12h6M9 16h6"/></svg>
           </div>
           <h3>Rotinas e obrigações</h3>
           <p>Organização das rotinas mensais, fiscais e trabalhistas para manter tudo em dia.</p>
         </div>
-        <div class="service-card">
+        <div class="service-card reveal reveal-delay-5">
           <div class="service-icon">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="M18 17V9M13 17V5M8 17v-3"/></svg>
           </div>
@@ -1288,27 +1468,27 @@
   <!-- HOW IT WORKS -->
   <section class="section how" id="como-funciona">
     <div class="container">
-      <div class="section-header">
+      <div class="section-header reveal">
         <span class="section-label">Processo simples</span>
         <h2 class="section-title">Como funciona o atendimento</h2>
         <p class="section-desc">Três passos claros para começar a contar com um suporte contábil próximo e organizado.</p>
       </div>
       <div class="steps">
-        <div class="step">
+        <div class="step reveal">
           <div class="step-num">1</div>
           <div class="step-content">
             <h3>Fale conosco</h3>
             <p>Entre em contato pelo WhatsApp ou telefone. Conte um pouco sobre sua empresa e o que precisa.</p>
           </div>
         </div>
-        <div class="step">
+        <div class="step reveal reveal-delay-1">
           <div class="step-num">2</div>
           <div class="step-content">
             <h3>Entendemos sua realidade</h3>
             <p>Avaliamos a situação atual e alinhamos o que faz sentido para o tamanho e o momento do seu negócio.</p>
           </div>
         </div>
-        <div class="step">
+        <div class="step reveal reveal-delay-2">
           <div class="step-num">3</div>
           <div class="step-content">
             <h3>Acompanhamento contínuo</h3>
@@ -1323,7 +1503,7 @@
   <section class="section about" id="sobre">
     <div class="container">
       <div class="about-grid">
-        <div class="about-text">
+        <div class="about-text reveal">
           <span class="section-label">Sobre nós</span>
           <h2>Mais de 16 anos ajudando empresas de Guarujá a se organizarem</h2>
           <p>A Patrícia Marques Contabilidade atua desde fevereiro de 2010 com foco em pequenas e médias empresas. O trabalho combina contabilidade, Imposto de Renda e consultoria financeira com atendimento próximo e transparente.</p>
@@ -1351,7 +1531,7 @@
             </li>
           </ul>
         </div>
-        <div class="about-card">
+        <div class="about-card reveal reveal-delay-2">
           <div class="about-card-stars">
             <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
             <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
@@ -1369,12 +1549,12 @@
   <!-- TESTIMONIALS -->
   <section class="section testimonials" id="avaliacoes">
     <div class="container">
-      <div class="section-header">
+      <div class="section-header reveal">
         <span class="section-label">Prova social</span>
         <h2 class="section-title">O que os clientes dizem</h2>
         <p class="section-desc">Relacionamentos de longo prazo construídos com confiança, honestidade e atendimento prestativo.</p>
       </div>
-      <div class="rating-banner">
+      <div class="rating-banner reveal">
         <div class="rating-score">4,9</div>
         <div class="rating-stars" aria-label="4,9 de 5">
           <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
@@ -1386,7 +1566,7 @@
         <p class="rating-count">Com base em 21 avaliações de clientes</p>
       </div>
       <div class="testimonials-grid">
-        <div class="testimonial-card">
+        <div class="testimonial-card reveal">
           <div class="testimonial-stars">
             <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
             <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
@@ -1397,7 +1577,7 @@
           <p>“O atendimento foi muito além do que imaginava, a proatividade foi um dos primeiros pontos positivos quando entrei em contato.”</p>
           <div class="testimonial-author">Cliente · Guarujá</div>
         </div>
-        <div class="testimonial-card">
+        <div class="testimonial-card reveal reveal-delay-1">
           <div class="testimonial-stars">
             <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
             <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
@@ -1408,7 +1588,7 @@
           <p>“Sou cliente a mais de 10 anos, empresa muito honesta, funcionários sempre prestativos e dispostos a ajudar.”</p>
           <div class="testimonial-author">Cliente há +10 anos</div>
         </div>
-        <div class="testimonial-card">
+        <div class="testimonial-card reveal reveal-delay-2">
           <div class="testimonial-stars">
             <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
             <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
@@ -1425,7 +1605,7 @@
 
   <!-- CTA FINAL -->
   <section class="cta-final">
-    <div class="container">
+    <div class="container reveal">
       <span class="section-label">Próximo passo</span>
       <h2>Pronto para organizar a contabilidade da sua empresa?</h2>
       <p>Fale diretamente com a equipe pelo WhatsApp. Atendimento próximo, sem complicação.</p>
@@ -1440,7 +1620,7 @@
   <section class="section contact" id="contato">
     <div class="container">
       <div class="contact-grid">
-        <div class="contact-info">
+        <div class="contact-info reveal">
           <h2>Contato e localização</h2>
           <p>Estamos em Vicente de Carvalho, Guarujá. Fale conosco pelo telefone ou WhatsApp.</p>
           <div class="contact-items">
@@ -1477,7 +1657,7 @@
             </div>
           </div>
         </div>
-        <div class="contact-map">
+        <div class="contact-map reveal reveal-delay-1">
           <iframe
             src="https://maps.google.com/maps?q=Rua+Washington+Luiz,+201,+Jardim+Cunhambebe,+Guaruj%C3%A1+-+SP,+11450-080&t=&z=16&ie=UTF8&iwloc=&output=embed"
             loading="lazy"
@@ -1528,7 +1708,7 @@
   </a>
 
   <script>
-    // Header scroll
+    // Header shadow on scroll
     const header = document.getElementById('header');
     window.addEventListener('scroll', () => {
       header.classList.toggle('scrolled', window.scrollY > 20);
@@ -1543,6 +1723,26 @@
     mobileNav.querySelectorAll('a').forEach(link => {
       link.addEventListener('click', () => mobileNav.classList.remove('open'));
     });
+
+    // Scroll reveal animations
+    const reveals = document.querySelectorAll('.reveal');
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, {
+      threshold: 0.12,
+      rootMargin: '0px 0px -40px 0px'
+    });
+
+    reveals.forEach(el => revealObserver.observe(el));
+
+    // Fallback: show all if IntersectionObserver not supported
+    if (!('IntersectionObserver' in window)) {
+      reveals.forEach(el => el.classList.add('visible'));
+    }
   </script>
 </body>
 </html>
