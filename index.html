@@ -1,0 +1,1548 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Patrícia Marques Contabilidade — Contabilidade, Imposto de Renda e consultoria financeira para PMEs em Guarujá-SP. Mais de 16 anos de experiência.">
+  <meta name="theme-color" content="#0B3D4A">
+  <title>Patrícia Marques Contabilidade | Guarujá-SP</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --navy: #0B3D4A;
+      --navy-dark: #072F38;
+      --navy-mid: #0E4A5A;
+      --teal: #1A7A8C;
+      --teal-light: #2A9AAD;
+      --gold: #C4A35A;
+      --gold-light: #D4B86A;
+      --cream: #F7F5F0;
+      --cream-dark: #EDE9E0;
+      --white: #FFFFFF;
+      --text: #1A2B2F;
+      --text-muted: #5A6B70;
+      --border: rgba(11, 61, 74, 0.12);
+      --shadow: 0 4px 24px rgba(11, 61, 74, 0.08);
+      --shadow-lg: 0 12px 40px rgba(11, 61, 74, 0.12);
+      --radius: 12px;
+      --radius-sm: 8px;
+      --transition: 0.25s ease;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html {
+      scroll-behavior: smooth;
+      -webkit-text-size-adjust: 100%;
+    }
+
+    body {
+      font-family: 'DM Sans', system-ui, -apple-system, sans-serif;
+      font-size: 16px;
+      line-height: 1.6;
+      color: var(--text);
+      background: var(--cream);
+      overflow-x: hidden;
+    }
+
+    img { max-width: 100%; height: auto; display: block; }
+    a { color: inherit; text-decoration: none; }
+    ul { list-style: none; }
+    button { font-family: inherit; cursor: pointer; border: none; background: none; }
+
+    .container {
+      width: 100%;
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    /* ─── HEADER ─── */
+    .header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 1000;
+      background: rgba(247, 245, 240, 0.92);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      transition: box-shadow var(--transition);
+    }
+
+    .header.scrolled {
+      box-shadow: var(--shadow);
+    }
+
+    .header-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 64px;
+      gap: 16px;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 700;
+      font-size: 0.95rem;
+      color: var(--navy);
+      letter-spacing: -0.02em;
+      flex-shrink: 0;
+    }
+
+    .logo-mark {
+      width: 36px;
+      height: 36px;
+      background: var(--navy);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--gold);
+      font-family: 'Instrument Serif', serif;
+      font-size: 1.25rem;
+      font-weight: 400;
+      flex-shrink: 0;
+    }
+
+    .logo-text {
+      display: none;
+    }
+
+    .nav {
+      display: none;
+      align-items: center;
+      gap: 28px;
+    }
+
+    .nav a {
+      font-size: 0.875rem;
+      font-weight: 500;
+      color: var(--text-muted);
+      transition: color var(--transition);
+    }
+
+    .nav a:hover { color: var(--navy); }
+
+    .header-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: var(--navy);
+      color: var(--white);
+      font-size: 0.8125rem;
+      font-weight: 600;
+      padding: 10px 16px;
+      border-radius: 50px;
+      transition: background var(--transition), transform var(--transition);
+      white-space: nowrap;
+    }
+
+    .header-cta:hover {
+      background: var(--navy-dark);
+      transform: translateY(-1px);
+    }
+
+    .header-cta svg {
+      width: 16px;
+      height: 16px;
+      flex-shrink: 0;
+    }
+
+    .menu-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 40px;
+      height: 40px;
+      color: var(--navy);
+      border-radius: var(--radius-sm);
+    }
+
+    .menu-btn svg { width: 22px; height: 22px; }
+
+    .mobile-nav {
+      display: none;
+      position: absolute;
+      top: 64px;
+      left: 0;
+      right: 0;
+      background: var(--cream);
+      border-bottom: 1px solid var(--border);
+      padding: 16px 20px 24px;
+      flex-direction: column;
+      gap: 4px;
+      box-shadow: var(--shadow);
+    }
+
+    .mobile-nav.open { display: flex; }
+
+    .mobile-nav a {
+      padding: 12px 8px;
+      font-size: 1rem;
+      font-weight: 500;
+      color: var(--text);
+      border-radius: var(--radius-sm);
+      transition: background var(--transition);
+    }
+
+    .mobile-nav a:hover { background: var(--cream-dark); }
+
+    /* ─── HERO ─── */
+    .hero {
+      padding: 100px 0 56px;
+      background: linear-gradient(165deg, var(--cream) 0%, var(--cream-dark) 100%);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: -20%;
+      right: -15%;
+      width: 500px;
+      height: 500px;
+      background: radial-gradient(circle, rgba(26, 122, 140, 0.06) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .hero-grid {
+      display: grid;
+      gap: 40px;
+      align-items: center;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(11, 61, 74, 0.06);
+      color: var(--navy);
+      font-size: 0.8125rem;
+      font-weight: 600;
+      padding: 6px 14px;
+      border-radius: 50px;
+      margin-bottom: 20px;
+    }
+
+    .hero-badge svg {
+      width: 14px;
+      height: 14px;
+      color: var(--gold);
+    }
+
+    .hero h1 {
+      font-family: 'Instrument Serif', serif;
+      font-size: clamp(1.875rem, 5vw, 2.75rem);
+      font-weight: 400;
+      line-height: 1.2;
+      color: var(--navy);
+      letter-spacing: -0.02em;
+      margin-bottom: 16px;
+    }
+
+    .hero h1 em {
+      font-style: italic;
+      color: var(--teal);
+    }
+
+    .hero-sub {
+      font-size: 1.0625rem;
+      color: var(--text-muted);
+      max-width: 480px;
+      margin-bottom: 28px;
+      line-height: 1.65;
+    }
+
+    .hero-ctas {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-bottom: 32px;
+    }
+
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--navy);
+      color: var(--white);
+      font-size: 0.9375rem;
+      font-weight: 600;
+      padding: 14px 24px;
+      border-radius: 50px;
+      transition: background var(--transition), transform var(--transition), box-shadow var(--transition);
+      box-shadow: 0 4px 16px rgba(11, 61, 74, 0.2);
+    }
+
+    .btn-primary:hover {
+      background: var(--navy-dark);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(11, 61, 74, 0.25);
+    }
+
+    .btn-primary svg { width: 18px; height: 18px; }
+
+    .btn-secondary {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: transparent;
+      color: var(--navy);
+      font-size: 0.9375rem;
+      font-weight: 600;
+      padding: 14px 24px;
+      border-radius: 50px;
+      border: 1.5px solid var(--border);
+      transition: border-color var(--transition), background var(--transition);
+    }
+
+    .btn-secondary:hover {
+      border-color: var(--navy);
+      background: rgba(11, 61, 74, 0.04);
+    }
+
+    .hero-rating {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 0.875rem;
+      color: var(--text-muted);
+    }
+
+    .stars {
+      display: flex;
+      gap: 2px;
+      color: var(--gold);
+    }
+
+    .stars svg { width: 16px; height: 16px; fill: currentColor; }
+
+    .hero-visual {
+      display: none;
+      position: relative;
+    }
+
+    .hero-card {
+      background: var(--white);
+      border-radius: 16px;
+      padding: 28px;
+      box-shadow: var(--shadow-lg);
+      border: 1px solid var(--border);
+    }
+
+    .hero-card-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 20px;
+      padding-bottom: 16px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .hero-card-icon {
+      width: 44px;
+      height: 44px;
+      background: var(--navy);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--gold);
+    }
+
+    .hero-card-icon svg { width: 22px; height: 22px; }
+
+    .hero-card-title {
+      font-weight: 600;
+      font-size: 0.9375rem;
+      color: var(--navy);
+    }
+
+    .hero-card-sub {
+      font-size: 0.8125rem;
+      color: var(--text-muted);
+    }
+
+    .hero-stats {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+
+    .hero-stat {
+      text-align: center;
+      padding: 14px 8px;
+      background: var(--cream);
+      border-radius: var(--radius-sm);
+    }
+
+    .hero-stat-value {
+      font-family: 'Instrument Serif', serif;
+      font-size: 1.5rem;
+      color: var(--navy);
+      line-height: 1.2;
+    }
+
+    .hero-stat-label {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      margin-top: 2px;
+    }
+
+    /* ─── TRUST BAR ─── */
+    .trust-bar {
+      background: var(--navy);
+      color: var(--white);
+      padding: 28px 0;
+    }
+
+    .trust-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+
+    .trust-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+    }
+
+    .trust-icon {
+      width: 36px;
+      height: 36px;
+      background: rgba(196, 163, 90, 0.15);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--gold);
+      flex-shrink: 0;
+    }
+
+    .trust-icon svg { width: 18px; height: 18px; }
+
+    .trust-label {
+      font-size: 0.8125rem;
+      opacity: 0.7;
+      margin-bottom: 2px;
+    }
+
+    .trust-value {
+      font-size: 0.9375rem;
+      font-weight: 600;
+    }
+
+    /* ─── SECTIONS COMMON ─── */
+    .section {
+      padding: 64px 0;
+    }
+
+    .section-header {
+      text-align: center;
+      max-width: 560px;
+      margin: 0 auto 40px;
+    }
+
+    .section-label {
+      display: inline-block;
+      font-size: 0.8125rem;
+      font-weight: 600;
+      color: var(--teal);
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      margin-bottom: 10px;
+    }
+
+    .section-title {
+      font-family: 'Instrument Serif', serif;
+      font-size: clamp(1.625rem, 4vw, 2.25rem);
+      font-weight: 400;
+      color: var(--navy);
+      letter-spacing: -0.02em;
+      line-height: 1.25;
+      margin-bottom: 12px;
+    }
+
+    .section-desc {
+      font-size: 1rem;
+      color: var(--text-muted);
+      line-height: 1.65;
+    }
+
+    /* ─── SERVICES ─── */
+    .services {
+      background: var(--white);
+    }
+
+    .services-grid {
+      display: grid;
+      gap: 16px;
+    }
+
+    .service-card {
+      background: var(--cream);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 24px;
+      transition: border-color var(--transition), box-shadow var(--transition), transform var(--transition);
+    }
+
+    .service-card:hover {
+      border-color: rgba(26, 122, 140, 0.3);
+      box-shadow: var(--shadow);
+      transform: translateY(-2px);
+    }
+
+    .service-icon {
+      width: 44px;
+      height: 44px;
+      background: var(--navy);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--gold);
+      margin-bottom: 16px;
+    }
+
+    .service-icon svg { width: 22px; height: 22px; }
+
+    .service-card h3 {
+      font-size: 1.0625rem;
+      font-weight: 600;
+      color: var(--navy);
+      margin-bottom: 8px;
+    }
+
+    .service-card p {
+      font-size: 0.9375rem;
+      color: var(--text-muted);
+      line-height: 1.6;
+    }
+
+    /* ─── HOW IT WORKS ─── */
+    .how {
+      background: var(--cream);
+    }
+
+    .steps {
+      display: grid;
+      gap: 24px;
+      counter-reset: step;
+    }
+
+    .step {
+      display: flex;
+      gap: 16px;
+      align-items: flex-start;
+      counter-increment: step;
+    }
+
+    .step-num {
+      width: 44px;
+      height: 44px;
+      background: var(--navy);
+      color: var(--gold);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Instrument Serif', serif;
+      font-size: 1.25rem;
+      flex-shrink: 0;
+    }
+
+    .step-content h3 {
+      font-size: 1.0625rem;
+      font-weight: 600;
+      color: var(--navy);
+      margin-bottom: 4px;
+    }
+
+    .step-content p {
+      font-size: 0.9375rem;
+      color: var(--text-muted);
+      line-height: 1.6;
+    }
+
+    /* ─── ABOUT ─── */
+    .about {
+      background: var(--white);
+    }
+
+    .about-grid {
+      display: grid;
+      gap: 32px;
+    }
+
+    .about-text h2 {
+      font-family: 'Instrument Serif', serif;
+      font-size: clamp(1.5rem, 3.5vw, 2rem);
+      font-weight: 400;
+      color: var(--navy);
+      letter-spacing: -0.02em;
+      line-height: 1.3;
+      margin-bottom: 16px;
+    }
+
+    .about-text p {
+      font-size: 1rem;
+      color: var(--text-muted);
+      line-height: 1.7;
+      margin-bottom: 12px;
+    }
+
+    .about-list {
+      margin-top: 20px;
+      display: grid;
+      gap: 10px;
+    }
+
+    .about-list li {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 0.9375rem;
+      color: var(--text);
+      font-weight: 500;
+    }
+
+    .about-list svg {
+      width: 18px;
+      height: 18px;
+      color: var(--teal);
+      flex-shrink: 0;
+    }
+
+    .about-card {
+      background: var(--navy);
+      color: var(--white);
+      border-radius: 16px;
+      padding: 32px 28px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .about-card::before {
+      content: '';
+      position: absolute;
+      bottom: -30%;
+      right: -20%;
+      width: 200px;
+      height: 200px;
+      background: radial-gradient(circle, rgba(196, 163, 90, 0.12) 0%, transparent 70%);
+    }
+
+    .about-card-quote {
+      font-family: 'Instrument Serif', serif;
+      font-size: 1.25rem;
+      font-style: italic;
+      line-height: 1.5;
+      margin-bottom: 20px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .about-card-meta {
+      font-size: 0.875rem;
+      opacity: 0.75;
+      position: relative;
+      z-index: 1;
+    }
+
+    .about-card-stars {
+      display: flex;
+      gap: 2px;
+      color: var(--gold);
+      margin-bottom: 12px;
+    }
+
+    .about-card-stars svg { width: 14px; height: 14px; fill: currentColor; }
+
+    /* ─── TESTIMONIALS ─── */
+    .testimonials {
+      background: var(--cream);
+    }
+
+    .rating-banner {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 36px;
+      text-align: center;
+    }
+
+    .rating-score {
+      font-family: 'Instrument Serif', serif;
+      font-size: 3rem;
+      color: var(--navy);
+      line-height: 1;
+    }
+
+    .rating-stars {
+      display: flex;
+      gap: 3px;
+      color: var(--gold);
+    }
+
+    .rating-stars svg { width: 20px; height: 20px; fill: currentColor; }
+
+    .rating-count {
+      font-size: 0.875rem;
+      color: var(--text-muted);
+    }
+
+    .testimonials-grid {
+      display: grid;
+      gap: 16px;
+    }
+
+    .testimonial-card {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 24px;
+    }
+
+    .testimonial-stars {
+      display: flex;
+      gap: 2px;
+      color: var(--gold);
+      margin-bottom: 12px;
+    }
+
+    .testimonial-stars svg { width: 14px; height: 14px; fill: currentColor; }
+
+    .testimonial-card p {
+      font-size: 0.9375rem;
+      color: var(--text);
+      line-height: 1.65;
+      margin-bottom: 16px;
+      font-style: italic;
+    }
+
+    .testimonial-author {
+      font-size: 0.8125rem;
+      font-weight: 600;
+      color: var(--navy);
+    }
+
+    /* ─── CTA FINAL ─── */
+    .cta-final {
+      background: var(--navy);
+      color: var(--white);
+      padding: 64px 0;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .cta-final::before {
+      content: '';
+      position: absolute;
+      top: -40%;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 600px;
+      height: 400px;
+      background: radial-gradient(circle, rgba(196, 163, 90, 0.1) 0%, transparent 60%);
+      pointer-events: none;
+    }
+
+    .cta-final .section-label { color: var(--gold); }
+
+    .cta-final h2 {
+      font-family: 'Instrument Serif', serif;
+      font-size: clamp(1.625rem, 4vw, 2.25rem);
+      font-weight: 400;
+      letter-spacing: -0.02em;
+      line-height: 1.25;
+      margin-bottom: 12px;
+      position: relative;
+    }
+
+    .cta-final p {
+      font-size: 1rem;
+      opacity: 0.8;
+      max-width: 440px;
+      margin: 0 auto 28px;
+      line-height: 1.65;
+      position: relative;
+    }
+
+    .cta-final .btn-primary {
+      background: var(--gold);
+      color: var(--navy);
+      box-shadow: 0 4px 16px rgba(196, 163, 90, 0.3);
+    }
+
+    .cta-final .btn-primary:hover {
+      background: var(--gold-light);
+      box-shadow: 0 6px 20px rgba(196, 163, 90, 0.4);
+    }
+
+    /* ─── CONTACT ─── */
+    .contact {
+      background: var(--white);
+      padding: 64px 0;
+    }
+
+    .contact-grid {
+      display: grid;
+      gap: 32px;
+    }
+
+    .contact-info h2 {
+      font-family: 'Instrument Serif', serif;
+      font-size: clamp(1.5rem, 3.5vw, 2rem);
+      font-weight: 400;
+      color: var(--navy);
+      letter-spacing: -0.02em;
+      margin-bottom: 8px;
+    }
+
+    .contact-info > p {
+      font-size: 1rem;
+      color: var(--text-muted);
+      margin-bottom: 28px;
+    }
+
+    .contact-items {
+      display: grid;
+      gap: 18px;
+    }
+
+    .contact-item {
+      display: flex;
+      gap: 14px;
+      align-items: flex-start;
+    }
+
+    .contact-item-icon {
+      width: 40px;
+      height: 40px;
+      background: var(--cream);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--teal);
+      flex-shrink: 0;
+    }
+
+    .contact-item-icon svg { width: 18px; height: 18px; }
+
+    .contact-item-label {
+      font-size: 0.75rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      color: var(--text-muted);
+      margin-bottom: 2px;
+    }
+
+    .contact-item-value {
+      font-size: 0.9375rem;
+      font-weight: 500;
+      color: var(--navy);
+    }
+
+    .contact-item-value a:hover { color: var(--teal); }
+
+    .contact-map {
+      border-radius: var(--radius);
+      overflow: hidden;
+      border: 1px solid var(--border);
+      background: var(--cream);
+      min-height: 240px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .contact-map iframe {
+      width: 100%;
+      height: 280px;
+      border: 0;
+    }
+
+    .map-fallback {
+      text-align: center;
+      padding: 40px 20px;
+      color: var(--text-muted);
+    }
+
+    .map-fallback svg {
+      width: 40px;
+      height: 40px;
+      color: var(--teal);
+      margin: 0 auto 12px;
+    }
+
+    .map-fallback a {
+      color: var(--teal);
+      font-weight: 600;
+      text-decoration: underline;
+    }
+
+    /* ─── FOOTER ─── */
+    .footer {
+      background: var(--navy-dark);
+      color: rgba(255, 255, 255, 0.7);
+      padding: 40px 0 24px;
+      font-size: 0.875rem;
+    }
+
+    .footer-grid {
+      display: grid;
+      gap: 28px;
+      margin-bottom: 32px;
+    }
+
+    .footer-brand .logo {
+      color: var(--white);
+      margin-bottom: 10px;
+    }
+
+    .footer-brand .logo-mark {
+      background: rgba(255, 255, 255, 0.1);
+    }
+
+    .footer-brand p {
+      font-size: 0.8125rem;
+      line-height: 1.6;
+      max-width: 280px;
+    }
+
+    .footer-col h4 {
+      font-size: 0.8125rem;
+      font-weight: 600;
+      color: var(--white);
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      margin-bottom: 12px;
+    }
+
+    .footer-col a,
+    .footer-col p {
+      display: block;
+      font-size: 0.875rem;
+      margin-bottom: 6px;
+      transition: color var(--transition);
+    }
+
+    .footer-col a:hover { color: var(--gold); }
+
+    .footer-bottom {
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      padding-top: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      font-size: 0.8125rem;
+    }
+
+    .footer-bottom a:hover { color: var(--gold); }
+
+    /* ─── FLOATING WHATSAPP ─── */
+    .float-wa {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      z-index: 999;
+      width: 56px;
+      height: 56px;
+      background: #25D366;
+      color: white;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 4px 20px rgba(37, 211, 102, 0.4);
+      transition: transform var(--transition), box-shadow var(--transition);
+    }
+
+    .float-wa:hover {
+      transform: scale(1.08);
+      box-shadow: 0 6px 28px rgba(37, 211, 102, 0.5);
+    }
+
+    .float-wa svg { width: 28px; height: 28px; }
+
+    .float-wa-pulse {
+      position: absolute;
+      inset: 0;
+      border-radius: 50%;
+      background: #25D366;
+      animation: pulse 2s infinite;
+      z-index: -1;
+    }
+
+    @keyframes pulse {
+      0% { transform: scale(1); opacity: 0.6; }
+      100% { transform: scale(1.5); opacity: 0; }
+    }
+
+    /* ─── RESPONSIVE ─── */
+    @media (min-width: 480px) {
+      .trust-grid {
+        grid-template-columns: repeat(4, 1fr);
+        gap: 16px;
+      }
+
+      .trust-item {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        gap: 8px;
+      }
+    }
+
+    @media (min-width: 640px) {
+      .logo-text { display: block; }
+
+      .services-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .testimonials-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+
+      .steps {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 28px;
+      }
+
+      .step {
+        flex-direction: column;
+        text-align: center;
+        align-items: center;
+      }
+
+      .footer-grid {
+        grid-template-columns: 2fr 1fr 1fr;
+      }
+
+      .footer-bottom {
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+      }
+    }
+
+    @media (min-width: 768px) {
+      .header-inner { height: 72px; }
+
+      .menu-btn { display: none; }
+
+      .nav { display: flex; }
+
+      .hero { padding: 120px 0 72px; }
+
+      .hero-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 48px;
+      }
+
+      .hero-visual { display: block; }
+
+      .section { padding: 80px 0; }
+
+      .services-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+
+      .about-grid {
+        grid-template-columns: 1.2fr 1fr;
+        gap: 48px;
+        align-items: center;
+      }
+
+      .contact-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 48px;
+        align-items: start;
+      }
+
+      .cta-final { padding: 80px 0; }
+    }
+
+    @media (min-width: 1024px) {
+      .container { padding: 0 32px; }
+
+      .hero h1 { font-size: 2.75rem; }
+
+      .services-grid {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header class="header" id="header">
+    <div class="container header-inner">
+      <a href="#" class="logo">
+        <span class="logo-mark">P</span>
+        <span class="logo-text">Patrícia Marques Contabilidade</span>
+      </a>
+      <nav class="nav">
+        <a href="#servicos">Serviços</a>
+        <a href="#como-funciona">Como funciona</a>
+        <a href="#sobre">Sobre</a>
+        <a href="#avaliacoes">Avaliações</a>
+        <a href="#contato">Contato</a>
+      </nav>
+      <a href="https://wa.me/551333236288" class="header-cta" target="_blank" rel="noopener" aria-label="Falar pelo WhatsApp">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.435 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        WhatsApp
+      </a>
+      <button class="menu-btn" id="menuBtn" aria-label="Abrir menu">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
+      </button>
+    </div>
+    <nav class="mobile-nav" id="mobileNav">
+      <a href="#servicos">Serviços</a>
+      <a href="#como-funciona">Como funciona</a>
+      <a href="#sobre">Sobre</a>
+      <a href="#avaliacoes">Avaliações</a>
+      <a href="#contato">Contato</a>
+      <a href="https://wa.me/551333236288" target="_blank" rel="noopener">Falar pelo WhatsApp</a>
+    </nav>
+  </header>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="container hero-grid">
+      <div class="hero-content">
+        <div class="hero-badge">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          Desde 2010 · Guarujá-SP
+        </div>
+        <h1>Contabilidade que ajuda sua empresa a tomar decisões com mais <em>segurança</em>.</h1>
+        <p class="hero-sub">Contabilidade, Imposto de Renda e consultoria financeira para pequenas e médias empresas em Guarujá e região.</p>
+        <div class="hero-ctas">
+          <a href="https://wa.me/551333236288" class="btn-primary" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.435 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+            Falar pelo WhatsApp
+          </a>
+          <a href="#servicos" class="btn-secondary">Conhecer serviços</a>
+        </div>
+        <div class="hero-rating">
+          <div class="stars" aria-label="4,9 de 5 estrelas">
+            <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          </div>
+          <span><strong>4,9</strong> · 21 avaliações de clientes</span>
+        </div>
+      </div>
+      <div class="hero-visual">
+        <div class="hero-card">
+          <div class="hero-card-header">
+            <div class="hero-card-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><path d="M14 2v6h6M16 13H8M16 17H8M10 9H8"/></svg>
+            </div>
+            <div>
+              <div class="hero-card-title">Gestão contábil completa</div>
+              <div class="hero-card-sub">Para PMEs de Guarujá e região</div>
+            </div>
+          </div>
+          <div class="hero-stats">
+            <div class="hero-stat">
+              <div class="hero-stat-value">16+</div>
+              <div class="hero-stat-label">Anos de mercado</div>
+            </div>
+            <div class="hero-stat">
+              <div class="hero-stat-value">4,9</div>
+              <div class="hero-stat-label">Nota dos clientes</div>
+            </div>
+            <div class="hero-stat">
+              <div class="hero-stat-value">2010</div>
+              <div class="hero-stat-label">Fundação</div>
+            </div>
+            <div class="hero-stat">
+              <div class="hero-stat-value">PME</div>
+              <div class="hero-stat-label">Foco principal</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TRUST BAR -->
+  <section class="trust-bar">
+    <div class="container">
+      <div class="trust-grid">
+        <div class="trust-item">
+          <div class="trust-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+          </div>
+          <div>
+            <div class="trust-label">Experiência</div>
+            <div class="trust-value">Mais de 16 anos</div>
+          </div>
+        </div>
+        <div class="trust-item">
+          <div class="trust-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg>
+          </div>
+          <div>
+            <div class="trust-label">Atendimento</div>
+            <div class="trust-value">Próximo e personalizado</div>
+          </div>
+        </div>
+        <div class="trust-item">
+          <div class="trust-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><path d="M22 4L12 14.01l-3-3"/></svg>
+          </div>
+          <div>
+            <div class="trust-label">Especialidade</div>
+            <div class="trust-value">PMEs e gestão</div>
+          </div>
+        </div>
+        <div class="trust-item">
+          <div class="trust-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          </div>
+          <div>
+            <div class="trust-label">Confiança</div>
+            <div class="trust-value">Avaliação 4,9/5</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SERVICES -->
+  <section class="section services" id="servicos">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-label">O que fazemos</span>
+        <h2 class="section-title">Serviços para sua empresa crescer com organização</h2>
+        <p class="section-desc">Soluções contábeis e financeiras pensadas para pequenas e médias empresas que precisam de clareza e suporte real.</p>
+      </div>
+      <div class="services-grid">
+        <div class="service-card">
+          <div class="service-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><path d="M14 2v6h6M16 13H8M16 17H8M10 9H8"/></svg>
+          </div>
+          <h3>Contabilidade empresarial</h3>
+          <p>Escrituração, demonstrativos e obrigações contábeis com acompanhamento próximo para sua empresa.</p>
+        </div>
+        <div class="service-card">
+          <div class="service-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
+          </div>
+          <h3>Imposto de Renda</h3>
+          <p>Declaração de IR para pessoa física e jurídica, com orientação clara e atenção aos prazos.</p>
+        </div>
+        <div class="service-card">
+          <div class="service-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg>
+          </div>
+          <h3>Consultoria financeira</h3>
+          <p>Orientação para decisões financeiras com base em dados reais da sua operação.</p>
+        </div>
+        <div class="service-card">
+          <div class="service-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg>
+          </div>
+          <h3>Apoio para PMEs</h3>
+          <p>Atendimento especializado para pequenas e médias empresas que precisam de parceiro confiável.</p>
+        </div>
+        <div class="service-card">
+          <div class="service-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2"/><rect x="9" y="3" width="6" height="4" rx="1"/><path d="M9 12h6M9 16h6"/></svg>
+          </div>
+          <h3>Rotinas e obrigações</h3>
+          <p>Organização das rotinas mensais, fiscais e trabalhistas para manter tudo em dia.</p>
+        </div>
+        <div class="service-card">
+          <div class="service-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="M18 17V9M13 17V5M8 17v-3"/></svg>
+          </div>
+          <h3>Assessoria em gestão</h3>
+          <p>Suporte para interpretar números e usar a contabilidade a favor da gestão do negócio.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- HOW IT WORKS -->
+  <section class="section how" id="como-funciona">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-label">Processo simples</span>
+        <h2 class="section-title">Como funciona o atendimento</h2>
+        <p class="section-desc">Três passos claros para começar a contar com um suporte contábil próximo e organizado.</p>
+      </div>
+      <div class="steps">
+        <div class="step">
+          <div class="step-num">1</div>
+          <div class="step-content">
+            <h3>Fale conosco</h3>
+            <p>Entre em contato pelo WhatsApp ou telefone. Conte um pouco sobre sua empresa e o que precisa.</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">2</div>
+          <div class="step-content">
+            <h3>Entendemos sua realidade</h3>
+            <p>Avaliamos a situação atual e alinhamos o que faz sentido para o tamanho e o momento do seu negócio.</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">3</div>
+          <div class="step-content">
+            <h3>Acompanhamento contínuo</h3>
+            <p>Cuidamos das rotinas, orientamos nas decisões e mantemos o contato próximo ao longo do tempo.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section class="section about" id="sobre">
+    <div class="container">
+      <div class="about-grid">
+        <div class="about-text">
+          <span class="section-label">Sobre nós</span>
+          <h2>Mais de 16 anos ajudando empresas de Guarujá a se organizarem</h2>
+          <p>A Patrícia Marques Contabilidade atua desde fevereiro de 2010 com foco em pequenas e médias empresas. O trabalho combina contabilidade, Imposto de Renda e consultoria financeira com atendimento próximo e transparente.</p>
+          <p>Clientes destacam a proatividade, a honestidade e a disposição da equipe em ajudar — valores que guiam o dia a dia do escritório.</p>
+          <ul class="about-list">
+            <li>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
+              Mais de 16 anos de atuação no mercado
+            </li>
+            <li>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
+              Atendimento próximo e personalizado
+            </li>
+            <li>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
+              Experiência com pequenas e médias empresas
+            </li>
+            <li>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
+              Orientação para tomada de decisões
+            </li>
+            <li>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
+              Empresa ativa e estabelecida desde 2010
+            </li>
+          </ul>
+        </div>
+        <div class="about-card">
+          <div class="about-card-stars">
+            <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          </div>
+          <p class="about-card-quote">“O atendimento foi muito além do que imaginava, a proatividade foi um dos primeiros pontos positivos quando entrei em contato.”</p>
+          <p class="about-card-meta">Cliente · Guarujá-SP</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TESTIMONIALS -->
+  <section class="section testimonials" id="avaliacoes">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-label">Prova social</span>
+        <h2 class="section-title">O que os clientes dizem</h2>
+        <p class="section-desc">Relacionamentos de longo prazo construídos com confiança, honestidade e atendimento prestativo.</p>
+      </div>
+      <div class="rating-banner">
+        <div class="rating-score">4,9</div>
+        <div class="rating-stars" aria-label="4,9 de 5">
+          <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+        </div>
+        <p class="rating-count">Com base em 21 avaliações de clientes</p>
+      </div>
+      <div class="testimonials-grid">
+        <div class="testimonial-card">
+          <div class="testimonial-stars">
+            <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          </div>
+          <p>“O atendimento foi muito além do que imaginava, a proatividade foi um dos primeiros pontos positivos quando entrei em contato.”</p>
+          <div class="testimonial-author">Cliente · Guarujá</div>
+        </div>
+        <div class="testimonial-card">
+          <div class="testimonial-stars">
+            <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          </div>
+          <p>“Sou cliente a mais de 10 anos, empresa muito honesta, funcionários sempre prestativos e dispostos a ajudar.”</p>
+          <div class="testimonial-author">Cliente há +10 anos</div>
+        </div>
+        <div class="testimonial-card">
+          <div class="testimonial-stars">
+            <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          </div>
+          <p>“Sou cliente a 2 anos, pessoa muito honesta. Recomendo os serviços.”</p>
+          <div class="testimonial-author">Cliente há 2 anos</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA FINAL -->
+  <section class="cta-final">
+    <div class="container">
+      <span class="section-label">Próximo passo</span>
+      <h2>Pronto para organizar a contabilidade da sua empresa?</h2>
+      <p>Fale diretamente com a equipe pelo WhatsApp. Atendimento próximo, sem complicação.</p>
+      <a href="https://wa.me/551333236288" class="btn-primary" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.435 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        Fale com a Patrícia pelo WhatsApp
+      </a>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section class="section contact" id="contato">
+    <div class="container">
+      <div class="contact-grid">
+        <div class="contact-info">
+          <h2>Contato e localização</h2>
+          <p>Estamos em Vicente de Carvalho, Guarujá. Fale conosco pelo telefone ou WhatsApp.</p>
+          <div class="contact-items">
+            <div class="contact-item">
+              <div class="contact-item-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+              </div>
+              <div>
+                <div class="contact-item-label">Endereço</div>
+                <div class="contact-item-value">Rua Washington Luiz, 201<br>Jardim Cunhambebe (Vicente de Carvalho)<br>Guarujá – SP, CEP 11450-080</div>
+              </div>
+            </div>
+            <div class="contact-item">
+              <div class="contact-item-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+              </div>
+              <div>
+                <div class="contact-item-label">Telefone / WhatsApp</div>
+                <div class="contact-item-value">
+                  <a href="tel:+551333236288">(13) 3323-6288</a>
+                </div>
+              </div>
+            </div>
+            <div class="contact-item">
+              <div class="contact-item-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z"/><path d="M17.5 6.5h.01"/></svg>
+              </div>
+              <div>
+                <div class="contact-item-label">Instagram</div>
+                <div class="contact-item-value">
+                  <a href="https://instagram.com/patriciamaques_contabil" target="_blank" rel="noopener">@patriciamaques_contabil</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="contact-map">
+          <iframe
+            src="https://maps.google.com/maps?q=Rua+Washington+Luiz,+201,+Jardim+Cunhambebe,+Guaruj%C3%A1+-+SP,+11450-080&t=&z=16&ie=UTF8&iwloc=&output=embed"
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade"
+            title="Localização — Patrícia Marques Contabilidade"
+            allowfullscreen>
+          </iframe>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="#" class="logo">
+            <span class="logo-mark">P</span>
+            <span class="logo-text">Patrícia Marques Contabilidade</span>
+          </a>
+          <p>Contabilidade, Imposto de Renda e consultoria financeira para PMEs em Guarujá-SP. Desde 2010.</p>
+        </div>
+        <div class="footer-col">
+          <h4>Contato</h4>
+          <a href="tel:+551333236288">(13) 3323-6288</a>
+          <a href="https://wa.me/551333236288" target="_blank" rel="noopener">WhatsApp</a>
+          <a href="https://instagram.com/patriciamaques_contabil" target="_blank" rel="noopener">@patriciamaques_contabil</a>
+        </div>
+        <div class="footer-col">
+          <h4>Endereço</h4>
+          <p>Rua Washington Luiz, 201</p>
+          <p>Vicente de Carvalho</p>
+          <p>Guarujá – SP, 11450-080</p>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© 2026 Patrícia Marques Contabilidade · CNPJ 11.551.761/0001-58</span>
+        <span>Guarujá – SP</span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- FLOATING WHATSAPP -->
+  <a href="https://wa.me/551333236288" class="float-wa" target="_blank" rel="noopener" aria-label="Abrir WhatsApp">
+    <span class="float-wa-pulse"></span>
+    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.435 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+  </a>
+
+  <script>
+    // Header scroll
+    const header = document.getElementById('header');
+    window.addEventListener('scroll', () => {
+      header.classList.toggle('scrolled', window.scrollY > 20);
+    }, { passive: true });
+
+    // Mobile menu
+    const menuBtn = document.getElementById('menuBtn');
+    const mobileNav = document.getElementById('mobileNav');
+    menuBtn.addEventListener('click', () => {
+      mobileNav.classList.toggle('open');
+    });
+    mobileNav.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => mobileNav.classList.remove('open'));
+    });
+  </script>
+</body>
+</html>
